@@ -89,7 +89,7 @@ while True:
        go_to_base()
        quit()
 
-    # Move 
+    # Move test
     # arm above 
     go_arm_by_steps(channel_arm_above,current_angle_arm_above, angle_arm_above)
     current_angle_arm_above = angle_arm_above
