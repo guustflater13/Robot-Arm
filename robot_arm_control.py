@@ -1,4 +1,7 @@
 # robot_arm_control
+# Author: GuustFlater13
+
+
 from __future__ import division
 import time
 
@@ -68,6 +71,7 @@ def go_to_base():
     print("Going back to base, from: ", current_angle_arm_under, "and", current_angle_arm_above, )
     go_arm_by_steps(channel_arm_under, current_angle_arm_under, base_arm_under)
     go_arm_by_steps(channel_arm_above, current_angle_arm_above, base_arm_above)
+    angle_to_pulse_gripper(0)
 
 
 # Set frequency to 60hz, good for servos.
