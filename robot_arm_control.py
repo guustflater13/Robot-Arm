@@ -12,8 +12,6 @@ import Adafruit_PCA9685
 # Uncomment to enable debug output.
 import logging
 
-
-
 # Configure min and max servo pulse lengths
 # MG946R
 servo_min_mg946r = 90  # Min pulse length out of 4096
@@ -29,6 +27,7 @@ channel_arm_above = 11
 
 base_arm_under = 20
 base_arm_above = 50
+
 
 # calculate pule Width
 def angle_to_pulse_gripper(angle):
@@ -68,10 +67,10 @@ def go_to_base():
     angle_to_pulse_gripper(0)
 
 
-
 # Go direct to base
 pwm.set_pwm(channel_arm_above, 0, angle_to_pulse_arm(base_arm_above))
 pwm.set_pwm(channel_arm_under, 0, angle_to_pulse_arm(base_arm_under))
+
 
 def main():
     logging.basicConfig(level=logging.DEBUG)
@@ -113,7 +112,5 @@ def main():
         pwm.set_pwm(channel_gripper, 0, angle_to_pulse_gripper(angle_gripper))
 
 
-
-if __name__=="__main__"
+if __name__ == "__main__":
     main()
-
