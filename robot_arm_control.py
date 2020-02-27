@@ -71,10 +71,6 @@ def main():
         pwm.set_pwm(channel_gripper, 0, angle_to_pulse_gripper(angle_gripper))
 
 
-if __name__ == "__main__":
-    main()
-
-
 # Functions
 
 
@@ -114,3 +110,7 @@ def go_to_base():
     go_arm_by_steps(channel_arm_under, current_angle_arm_under, base_arm_under)
     go_arm_by_steps(channel_arm_above, current_angle_arm_above, base_arm_above)
     angle_to_pulse_gripper(0)
+
+
+if __name__ == "__main__":
+    main()
