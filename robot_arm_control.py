@@ -78,7 +78,7 @@ def main():
 def angle_to_pulse_gripper(angle):
     x = float(angle) * (100 / 180)
     pulse = int(((servo_max_sg90 - servo_min_sg90) / 100) * x) + servo_min_sg90
-    print("angle= ", angle, " : pulse= ", pulse)
+    print("Gripper: angle= ", angle, " : pulse= ", pulse)
     return pulse
 
 
@@ -86,7 +86,7 @@ def angle_to_pulse_gripper(angle):
 def angle_to_pulse_arm(angle):
     x = float(angle) * (100 / 180)
     pulse = int(((servo_max_mg946r - servo_min_mg946r) / 100) * x) + servo_min_mg946r
-    print("angle= ", angle, " : pulse= ", pulse)
+    print("Arm: angle= ", angle, " : pulse= ", pulse)
     return pulse
 
 
@@ -109,7 +109,7 @@ def go_to_base(current_angle_arm_under, current_angle_arm_above):
     print("Going back to base, from: ", current_angle_arm_under, "and", current_angle_arm_above, )
     go_arm_by_steps(channel_arm_under, current_angle_arm_under, base_arm_under)
     go_arm_by_steps(channel_arm_above, current_angle_arm_above, base_arm_above)
-    angle_to_pulse_gripper(0)
+    pwm.set_pwm(channel_gripper, 0, angle_to_pulse_gripper(0))
 
 
 if __name__ == "__main__":
