@@ -1,7 +1,5 @@
 # robot_arm_control
 # Author: GuustFlater13
-# test
-
 
 from __future__ import division
 import time
@@ -27,6 +25,11 @@ channel_arm_above = 11
 
 base_arm_under = 20
 base_arm_above = 50
+
+# Initialise the PCA9685 using the default address (0x40)
+# Alternatively specify a different address and/or bus:
+# pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
+pwm = Adafruit_PCA9685.PCA9685()
 
 
 # calculate pule Width
@@ -66,13 +69,9 @@ def go_to_base():
     go_arm_by_steps(channel_arm_above, current_angle_arm_above, base_arm_above)
     angle_to_pulse_gripper(0)
 
+
 def main():
     logging.basicConfig(level=logging.DEBUG)
-
-    # Initialise the PCA9685 using the default address (0x40).
-    pwm = Adafruit_PCA9685.PCA9685()
-    # Alternatively specify a different address and/or bus:
-    # pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
 
     # Initialize starting point
     current_angle_arm_under = base_arm_under
