@@ -64,7 +64,7 @@ def go_arm_by_steps(channel, current_angle, angle):
             step = step - 1
             pwm.set_pwm(channel, 0, angle_to_pulse_arm(step))
         print("step: ", step)
-        time.sleep(.1)
+        time.sleep(.05)
 
 
 # Go to base
