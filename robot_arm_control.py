@@ -66,12 +66,6 @@ def go_to_base():
     go_arm_by_steps(channel_arm_above, current_angle_arm_above, base_arm_above)
     angle_to_pulse_gripper(0)
 
-
-# Go direct to base
-pwm.set_pwm(channel_arm_above, 0, angle_to_pulse_arm(base_arm_above))
-pwm.set_pwm(channel_arm_under, 0, angle_to_pulse_arm(base_arm_under))
-
-
 def main():
     logging.basicConfig(level=logging.DEBUG)
 
@@ -86,6 +80,10 @@ def main():
 
     # Set frequency to 60hz, good for servos.
     pwm.set_pwm_freq(60)
+
+    # If not on Base, Go direct to base (not using go_arm_by_steps because current values unknown)
+    pwm.set_pwm(channel_arm_above, 0, angle_to_pulse_arm(base_arm_above))
+    pwm.set_pwm(channel_arm_under, 0, angle_to_pulse_arm(base_arm_under))
 
     while True:
         angle_arm_under = input("Enter angle of lower arm (or q to quit): ")
