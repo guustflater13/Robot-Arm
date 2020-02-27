@@ -49,15 +49,15 @@ def main():
     while True:
         angle_arm_under = input("Enter angle of lower arm (or q to quit): ")
         if angle_arm_under == "q" or angle_arm_under == "":
-            go_to_base()
+            go_to_base(current_angle_arm_under, current_angle_arm_above)
             quit()
         angle_arm_above = input("Enter angle of higher arm (or q to quit): ")
         if angle_arm_above == "q" or angle_arm_above == "":
-            go_to_base()
+            go_to_base(current_angle_arm_under, current_angle_arm_above)
             quit()
         angle_gripper = input("Enter angle of gripper (or q to quit): ")
         if angle_gripper == "q" or angle_gripper == "":
-            go_to_base()
+            go_to_base(current_angle_arm_under, current_angle_arm_above)
             quit()
 
         # Move
@@ -105,7 +105,7 @@ def go_arm_by_steps(channel, current_angle, angle):
 
 
 # Go to base
-def go_to_base():
+def go_to_base(current_angle_arm_under, current_angle_arm_above):
     print("Going back to base, from: ", current_angle_arm_under, "and", current_angle_arm_above, )
     go_arm_by_steps(channel_arm_under, current_angle_arm_under, base_arm_under)
     go_arm_by_steps(channel_arm_above, current_angle_arm_above, base_arm_above)
