@@ -35,11 +35,11 @@ pwm.set_pwm_freq(60)
 
 
 def get_base_arm_under():
-    return base_arm_under
+    return int(base_arm_under)
 
 
 def get_base_arm_above():
-    return base_arm_above
+    return int(base_arm_above)
 
 
 # If not on Base, Go direct to base (not using go_arm_by_steps because current values unknown)
