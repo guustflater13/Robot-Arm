@@ -54,23 +54,23 @@ def main():
     while True:
         angle_arm_under = input("Enter angle of lower arm (or q to quit): ")
         if angle_arm_under == "q" or angle_arm_under == "":
-            go_to_base(current_angle_arm_under, current_angle_arm_above)
+            robot_arm_functions.go_to_base(current_angle_arm_under, current_angle_arm_above)
             quit()
         angle_arm_above = input("Enter angle of higher arm (or q to quit): ")
         if angle_arm_above == "q" or angle_arm_above == "":
-            go_to_base(current_angle_arm_under, current_angle_arm_above)
+            robot_arm_functions.go_to_base(current_angle_arm_under, current_angle_arm_above)
             quit()
         angle_gripper = input("Enter angle of gripper (or q to quit): ")
         if angle_gripper == "q" or angle_gripper == "":
-            go_to_base(current_angle_arm_under, current_angle_arm_above)
+            robot_arm_functions.go_to_base(current_angle_arm_under, current_angle_arm_above)
             quit()
 
         # Move
         # arm above
-        go_arm_by_steps(channel_arm_above, current_angle_arm_above, angle_arm_above)
+        robot_arm_functions.go_arm_by_steps(channel_arm_above, current_angle_arm_above, angle_arm_above)
         current_angle_arm_above = angle_arm_above
         # arm under
-        go_arm_by_steps(channel_arm_under, current_angle_arm_under, angle_arm_under)
+        robot_arm_functions.go_arm_by_steps(channel_arm_under, current_angle_arm_under, angle_arm_under)
         current_angle_arm_under = angle_arm_under
         # gripper
         pwm.set_pwm(channel_gripper, 0, angle_to_pulse_gripper(angle_gripper))
