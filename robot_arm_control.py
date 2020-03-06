@@ -14,8 +14,8 @@ def main():
     logging.basicConfig(level=logging.DEBUG)
 
     # Initialize starting point
-    current_angle_arm_under = robot_arm_functions.base_arm_under()
-    current_angle_arm_above = robot_arm_functions.base_arm_above()
+    current_angle_arm_under = robot_arm_functions.get_base_arm_under()
+    current_angle_arm_above = robot_arm_functions.get_base_arm_above()
 
     # If not on Base, Go direct to base (not using go_arm_by_steps because current values unknown)
     robot_arm_functions.directly_back_to_base()
