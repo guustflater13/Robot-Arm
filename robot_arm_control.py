@@ -48,8 +48,8 @@ def main():
     pwm.set_pwm_freq(60)
 
     # If not on Base, Go direct to base (not using go_arm_by_steps because current values unknown)
-    pwm.set_pwm(channel_arm_above, 0, angle_to_pulse_arm(base_arm_above))
-    pwm.set_pwm(channel_arm_under, 0, angle_to_pulse_arm(base_arm_under))
+    pwm.set_pwm(channel_arm_above, 0, robot_arm_functions.angle_to_pulse_arm(base_arm_above))
+    pwm.set_pwm(channel_arm_under, 0, robot_arm_functions.angle_to_pulse_arm(base_arm_under))
 
     while True:
         angle_arm_under = input("Enter angle of lower arm (or q to quit): ")
@@ -73,7 +73,7 @@ def main():
         robot_arm_functions.go_arm_by_steps(channel_arm_under, current_angle_arm_under, angle_arm_under)
         current_angle_arm_under = angle_arm_under
         # gripper
-        pwm.set_pwm(channel_gripper, 0, angle_to_pulse_gripper(angle_gripper))
+        pwm.set_pwm(channel_gripper, 0, robot_arm_functions.angle_to_pulse_gripper(angle_gripper))
 
 
 if __name__ == "__main__":
