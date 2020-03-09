@@ -8,14 +8,14 @@ PCA9685 with adafruit driver
 Robot arm: 
        
        O
-      #  #
-arm1 #     # arm2
-    #        #
-   #           #
-  O              O#### gripper (Remains horizontal when moving arms)
-#####
-##0##
-#####
+      /  \
+arm1 /     \ arm2
+    /        \
+   /           \
+  O              O---- gripper (Remains horizontal when moving arms)
+-----
+| 0 |
+-----
 
 0: Table, not yet in place (180 degrees rotation)
 1: Lower arm
