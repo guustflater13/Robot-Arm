@@ -69,8 +69,8 @@ def main():
                     print('no more data from', client_address)
                     break
 
-                if no_more_data:
-                    break
+            if no_more_data:
+                break
 
             print(realdata_string)
         finally:
