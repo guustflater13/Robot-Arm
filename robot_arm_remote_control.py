@@ -42,6 +42,7 @@ def main():
         connection, client_address = sock.accept()
 
         realdata_string = ""
+        no_more_data = False
 
         try:
             print('connection from', client_address)
@@ -53,7 +54,9 @@ def main():
                     print('sending data back to the client')
                     connection.sendto(data, client_address)
                     realdata_string = (data.decode('utf-8'))
+                    print("realdata_string:", realdata_string)
                     if realdata_string == 'q;q;q;q':
+                        no_more_data = True
                         break
                     realdata = realdata_string.split(";")
                     rotate, arm_under, arm_above, gripper = realdata
@@ -64,6 +67,9 @@ def main():
 
                 else:
                     print('no more data from', client_address)
+                    break
+
+                if no_more_data:
                     break
 
             print(realdata_string)
