@@ -53,13 +53,14 @@ def main():
                     print('sending data back to the client')
                     connection.sendto(data, client_address)
                     realdata_string = (data.decode('utf-8'))
+                    if realdata_string == 'q;q;q;q':
+                        break
                     realdata = realdata_string.split(";")
                     rotate, arm_under, arm_above, gripper = realdata
                     print("rotate=", rotate)
                     print("arm_under=", arm_under)
                     print("arm_above=", arm_above)
                     print("gripper=", gripper)
-
 
                 else:
                     print('no more data from', client_address)
