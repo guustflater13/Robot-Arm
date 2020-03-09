@@ -13,7 +13,7 @@ import robot_arm_functions
 
 
 def main():
-    ip = '192.16.178.7'
+    ip = '192.168.178.7'
     port = 6666
 
     # Create a TCP/IP socket
