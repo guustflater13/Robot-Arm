@@ -8,11 +8,11 @@ PCA9685 with adafruit driver
 Robot arm: 
        
        O
-      /  \
-arm1 /     \ arm2
-    /        \
-   /           \
-  O              O---- gripper (Remains horizontal when moving arms)
+      / \
+arm1 /   \ arm2
+    /     \
+   /       O---- gripper (Remains horizontal when moving arms)    
+  O              
 -----
 | 0 |
 -----
