@@ -1,6 +1,5 @@
 # Robot-Arm
-I want to use an android OS to connect over ethernet with the raspberry and control the Robot Arm
-Robot Arm using:
+I want to use an android OS to connect over ethernet with the raspberry and control the Robot Arm using:
 
 Android phone,
 Raspberrry Pi with Raspbian,
