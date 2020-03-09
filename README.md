@@ -1,6 +1,11 @@
 # Robot-Arm
-Robot Arm using Raspbian + PCA9685
-Robot arm 
+I want to use an android OS to connect over ethernet with the raspberry and control the Robot Arm
+Robot Arm using:
+Android phone
+Raspberrry Pi with Raspbian
+PCA9685 with adafruit driver
+
+Robot arm: 
        
        O
       #  #
