@@ -52,7 +52,7 @@ def directly_back_to_base():
 def angle_to_pulse_gripper(angle):
     x = float(angle) * (100 / 180)
     pulse = int(((servo_max_sg90 - servo_min_sg90) / 100) * x) + servo_min_sg90
-    print("Gripper: angle= ", angle, " : pulse= ", pulse)
+    # print("Gripper: angle= ", angle, " : pulse= ", pulse)
     return pulse
 
 
@@ -60,47 +60,60 @@ def angle_to_pulse_gripper(angle):
 def angle_to_pulse_arm(angle):
     x = float(angle) * (100 / 180)
     pulse = int(((servo_max_mg946r - servo_min_mg946r) / 100) * x) + servo_min_mg946r
-    print("Arm: angle= ", angle, " : pulse= ", pulse)
+    # print("Arm: angle= ", angle, " : pulse= ", pulse)
     return pulse
 
 
 # go step by step
-def go_arm1_by_steps(current_angle, angle):
-    step = int(current_angle)
+def go_arm_under_by_steps(current_angle, angle):
     channel = channel_arm_under
-    while step != int(angle):
-        if int(current_angle) < int(angle):
+    angle = angle + base_arm_under
+    if angle > max_arm_under:
+        print("Angle Arm Under more then max angle, going to max!")
+        angle = max_arm_under
+    step = current_angle
+    print("Arm under: Going from", current_angle, " to", angle)
+    while step != angle:
+        if current_angle < angle:
             step = step + 1
             pwm.set_pwm(channel, 0, angle_to_pulse_arm(step))
-        if int(current_angle) > int(angle):
+        if current_angle > angle:
             step = step - 1
             pwm.set_pwm(channel, 0, angle_to_pulse_arm(step))
-        print("step: ", step)
+        # print("step: ", step)
         time.sleep(.05)
+    return angle
 
 
-def go_arm2_by_steps(current_angle, angle):
-    step = int(current_angle)
+def go_arm_above_by_steps(current_angle, angle):
     channel = channel_arm_above
-    while step != int(angle):
-        if int(current_angle) < int(angle):
+    angle = angle + base_arm_above
+    if angle > max_arm_above:
+        print("angle Arm Above more then max angle, going to max!")
+        angle = max_arm_above
+    step = current_angle
+    print("Arm above: Going from", current_angle, " to", angle)
+    while step != angle:
+        if current_angle < angle:
             step = step + 1
             pwm.set_pwm(channel, 0, angle_to_pulse_arm(step))
-        if int(current_angle) > int(angle):
+        if current_angle > angle:
             step = step - 1
             pwm.set_pwm(channel, 0, angle_to_pulse_arm(step))
-        print("step: ", step)
+        # print("step: ", step)
         time.sleep(.05)
+    return angle
 
 
 # Go to base
 def go_to_base(current_angle_arm_under, current_angle_arm_above):
     print("Going back to base, from: ", current_angle_arm_under, "and", current_angle_arm_above, )
-    go_arm1_by_steps(current_angle_arm_under, base_arm_under)
-    go_arm2_by_steps(current_angle_arm_above, base_arm_above)
+    go_arm_under_by_steps(current_angle_arm_under, 0)
+    go_arm_above_by_steps(current_angle_arm_above, 0)
     gripper(0)
 
 
 # gripper
 def gripper(angle):
+    print("Gripper:", angle)
     pwm.set_pwm(channel_gripper, 0, angle_to_pulse_gripper(angle))

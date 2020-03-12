@@ -27,13 +27,14 @@ def main():
     # Listen for incoming connections
     sock.listen(1)
 
-    logging.basicConfig(level=logging.DEBUG)
+    # logging.basicConfig(level=logging.DEBUG)
 
     # Initialize starting point
     current_angle_arm_under = robot_arm_functions.get_base_arm_under()
     current_angle_arm_above = robot_arm_functions.get_base_arm_above()
 
     # If not on Base, Go direct to base (not using go_arm_by_steps because current values unknown)
+    print("Robot to base position, if not already")
     robot_arm_functions.directly_back_to_base()
 
     while True:
@@ -54,16 +55,30 @@ def main():
                     print('sending data back to the client')
                     connection.sendto(data, client_address)
                     realdata_string = (data.decode('utf-8'))
-                    print("realdata_string:", realdata_string)
+                    # print("realdata_string:", realdata_string)
                     if realdata_string == 'q;q;q;q':
                         no_more_data = True
                         break
                     realdata = realdata_string.split(";")
-                    rotate, arm_under, arm_above, gripper = realdata
-                    print("rotate=", rotate)
-                    print("arm_under=", arm_under)
-                    print("arm_above=", arm_above)
-                    print("gripper=", gripper)
+                    input1, input2, input3, input4 = realdata
+                    rotate = int(input1)
+                    angle_arm_under = int(input2)
+                    angle_arm_above = int(input3)
+                    angle_gripper = int(input4)
+                    print("rotate=", rotate, "arm_under=", angle_arm_under, "arm_above=", angle_arm_above,
+                          "gripper=", angle_gripper)
+
+                    # Move robot
+                    # arm above
+                    current_angle_arm_above = robot_arm_functions.go_arm_above_by_steps(int(current_angle_arm_above),
+                                                                                        int(angle_arm_above))
+                    # current_angle_arm_above = angle_arm_above
+                    # arm under
+                    current_angle_arm_under = robot_arm_functions.go_arm_under_by_steps(int(current_angle_arm_under),
+                                                                                        int(angle_arm_under))
+                    # current_angle_arm_under = angle_arm_under
+                    # gripper
+                    robot_arm_functions.gripper(int(angle_gripper))
 
                 else:
                     print('no more data from', client_address)
@@ -72,10 +87,15 @@ def main():
             if no_more_data:
                 break
 
-            print(realdata_string)
         finally:
             # Clean up the connection
+            print('Received "%s"' % realdata_string, ' closing connection with', client_address)
             connection.close()
+
+    # bring robot to base position
+    print("Robot to base position:")
+    robot_arm_functions.go_to_base(int(current_angle_arm_under), int(current_angle_arm_above))
+    print("shutting down application")
 
 
 if __name__ == "__main__":
